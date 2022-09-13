@@ -16,11 +16,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.access.intercept.AuthorizationFilter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import sun.security.util.SecurityConstants;
+
 
 @Configuration
 @EnableWebSecurity
@@ -49,8 +47,8 @@ public class WebSecurityConfig{
 
         http.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint);
 
-        http.authorizeRequests().antMatchers(HttpMethod.POST, "api/user/login").authenticated()
-                .and().authorizeRequests().anyRequest().permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/user/login","/api/user/register").permitAll()
+                .and().authorizeRequests().antMatchers("/api/**").authenticated();
 
         http.authenticationManager(authenticationManager);
 

@@ -1,6 +1,7 @@
 package com.upwork.upworkbackend.security;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -33,14 +34,13 @@ public class JwtFilter extends OncePerRequestFilter {
                     authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                 }
-
             }
         } catch (Exception e) {
             logger.error(e.toString());
         }
-
         filterChain.doFilter(request, response);
     }
+
     private String getJwt(HttpServletRequest request) {
         String headerAuth = request.getHeader("Authorization");
 

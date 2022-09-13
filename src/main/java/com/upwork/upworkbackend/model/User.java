@@ -11,18 +11,16 @@ import javax.validation.constraints.Size;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Size(min = 1)
     private String name;
-    @Size(min = 1)
     private String surname;
     private String email;
     private String phoneNumber;
-    @Size(min = 8)
     private String password;
     private Role role;
 }
