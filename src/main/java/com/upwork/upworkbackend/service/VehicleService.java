@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Month;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,9 +36,16 @@ public class VehicleService {
         return vehicleRepository.findAll();
     }
 
-    public List<Vehicle> getAllVehiclesByMonth(Month month){
-       List<VehicleWorkingStatus> vehicleWorkingStatus = vehicleStatusRepository.findAllByMonth(month);
-       return vehicleWorkingStatus.stream().map(VehicleWorkingStatus::getVehicle).collect(Collectors.toList());
+    public List<Vehicle> getAllVehiclesByMonth(Month month) {
+        List<VehicleWorkingStatus> vehicleWorkingStatus = vehicleStatusRepository.findAllByMonth(month);
+        System.out.println(vehicleWorkingStatus.size());
+        List<Vehicle> vehicles = new ArrayList<>();
+        for (VehicleWorkingStatus vehicleWstatus : vehicleWorkingStatus) {
+            if (!vehicles.contains(vehicleWstatus.getVehicle())) {
+                vehicles.add(vehicleWstatus.getVehicle());
+            }
+        }
+        return vehicles;
     }
 
     public void editVehicleStatus(Long vehicleStatusId,Vehicle vehicleStatus) {
