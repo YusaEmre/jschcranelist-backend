@@ -23,9 +23,9 @@ public class VehicleController {
         return  vehicleService.getAllVehiclesByMonth(month);
     }
 
-    @PutMapping("/edit/{vehicleStatusId}")
-    public void editVehicleStatus(@PathVariable Long vehicleStatusId,@RequestBody Vehicle vehicle){
-        vehicleService.editVehicleStatus(vehicleStatusId,vehicle);
+    @PutMapping("/edit")
+    public void editVehicleStatus(@RequestBody Vehicle vehicle){
+        vehicleService.editVehicleStatus(vehicle);
     }
 
     @PostMapping("/save")

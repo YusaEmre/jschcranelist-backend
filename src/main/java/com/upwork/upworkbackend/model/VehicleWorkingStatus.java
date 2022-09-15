@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Month;
 
@@ -16,7 +17,7 @@ import java.time.Month;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class VehicleWorkingStatus {
+public class VehicleWorkingStatus implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

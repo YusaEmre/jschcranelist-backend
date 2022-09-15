@@ -48,11 +48,11 @@ public class VehicleService {
         return vehicles;
     }
 
-    public void editVehicleStatus(Long vehicleStatusId,Vehicle vehicleStatus) {
-        VehicleWorkingStatus vehicleWorkingStatus = vehicleStatusRepository.findById(vehicleStatusId).orElseThrow(()->new IllegalStateException("Wrong vehicle status id"));
-        Vehicle vehicle = vehicleWorkingStatus.getVehicle();
-        vehicle.setWorkingStatusList(vehicleStatus.getWorkingStatusList());
-        vehicleRepository.flush();
+    public void editVehicleStatus(Vehicle requestVehicle) {
+        for (VehicleWorkingStatus vehicleWorkingStatus:requestVehicle.getWorkingStatusList()) {
+            vehicleWorkingStatus.setVehicle(requestVehicle);
+        }
+        vehicleRepository.saveAndFlush(requestVehicle);
 
     }
 
@@ -64,10 +64,30 @@ public class VehicleService {
                 .size(vehicleSaveRequest.getSize())
                 .build();
 
+        if (workingStatusRepository.findAll().size() > 0) {
+            System.out.println(workingStatusRepository.findAll().size());
+            WorkingStatus workingStatus = workingStatusRepository.findById(1L).orElseThrow(()->new IllegalStateException("There is no status with id: " + 1L));
+            vehicleSaveRequest.setVehicleStatus(workingStatus,vehicle);
 
-        WorkingStatus workingStatus = workingStatusRepository.findById(1L).orElseThrow(()->new IllegalStateException("There is no status with id: " + 1L));
+        }else {
+            System.out.println(workingStatusRepository.findAll().size());
 
-        vehicleSaveRequest.setVehicleStatus(workingStatus,vehicle);
+            workingStatusRepository.save(new WorkingStatus("0"));
+            workingStatusRepository.save(new WorkingStatus("JO"));
+            workingStatusRepository.save(new WorkingStatus("AV"));
+            workingStatusRepository.save(new WorkingStatus("P90"));
+            workingStatusRepository.save(new WorkingStatus("LT"));
+            workingStatusRepository.save(new WorkingStatus("QT"));
+            workingStatusRepository.save(new WorkingStatus("P50"));
+            workingStatusRepository.save(new WorkingStatus("P75"));
+            workingStatusRepository.save(new WorkingStatus("SE"));
+            workingStatusRepository.save(new WorkingStatus("BD"));
+            WorkingStatus workingStatus = workingStatusRepository.findById(1L).orElseThrow(()->new IllegalStateException("There is no status with id: " + 1L));
+            vehicleSaveRequest.setVehicleStatus(workingStatus,vehicle);
+        }
+
+
+
         System.out.println(vehicleSaveRequest.getVehicleWorkingStatuses().size());
         vehicle.setWorkingStatusList(vehicleSaveRequest.getVehicleWorkingStatuses());
 

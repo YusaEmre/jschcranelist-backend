@@ -34,6 +34,7 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<?> userLogin(@RequestBody UserRequest userRequest) throws Exception {
+        System.out.println(userRequest);
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                     userRequest.getEmail(), userRequest.getPassword()
@@ -54,3 +55,4 @@ public class UserController {
         userService.saveUser(user);
     }
 }
+
