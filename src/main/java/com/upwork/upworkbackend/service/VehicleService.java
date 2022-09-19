@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Month;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,16 +37,11 @@ public class VehicleService {
         return vehicleRepository.findAll();
     }
 
-    public List<Vehicle> getAllVehiclesByMonth(Month month) {
-        List<VehicleWorkingStatus> vehicleWorkingStatus = vehicleStatusRepository.findAllByMonth(month);
-        System.out.println(vehicleWorkingStatus.size());
-        List<Vehicle> vehicles = new ArrayList<>();
-        for (VehicleWorkingStatus vehicleWstatus : vehicleWorkingStatus) {
-            if (!vehicles.contains(vehicleWstatus.getVehicle())) {
-                vehicles.add(vehicleWstatus.getVehicle());
-            }
-        }
-        return vehicles;
+    public List<Vehicle> getAllVehiclesByMonth(String date) {
+        String[] dateArray = date.split("-");
+        Month month = Month.of(Integer.parseInt(dateArray[0]));
+        Year year = Year.of(Integer.parseInt(dateArray[1]));
+        return vehicleRepository.findAllByMonthAndYear(month,year);
     }
 
     public void editVehicleStatus(Vehicle requestVehicle) {
@@ -57,20 +53,23 @@ public class VehicleService {
     }
 
     public void saveVehicle(VehicleSaveRequest vehicleSaveRequest) {
+        String[] dateArray = vehicleSaveRequest.getMonthYear().split("-");
+        Month month = Month.of(Integer.parseInt(dateArray[0]));
+        Year year = Year.of(Integer.parseInt(dateArray[1]));
         Vehicle vehicle = Vehicle.builder()
                 .fleetNo(vehicleSaveRequest.getFleetNo())
                 .vehicleModel(vehicleSaveRequest.getVehicleModel())
                 .operator(vehicleSaveRequest.getOperator())
+                .month(month)
+                .year(year)
                 .size(vehicleSaveRequest.getSize())
                 .build();
 
         if (workingStatusRepository.findAll().size() > 0) {
-            System.out.println(workingStatusRepository.findAll().size());
             WorkingStatus workingStatus = workingStatusRepository.findById(1L).orElseThrow(()->new IllegalStateException("There is no status with id: " + 1L));
             vehicleSaveRequest.setVehicleStatus(workingStatus,vehicle);
 
         }else {
-            System.out.println(workingStatusRepository.findAll().size());
 
             workingStatusRepository.save(new WorkingStatus("0"));
             workingStatusRepository.save(new WorkingStatus("JO"));
@@ -86,9 +85,6 @@ public class VehicleService {
             vehicleSaveRequest.setVehicleStatus(workingStatus,vehicle);
         }
 
-
-
-        System.out.println(vehicleSaveRequest.getVehicleWorkingStatuses().size());
         vehicle.setWorkingStatusList(vehicleSaveRequest.getVehicleWorkingStatuses());
 
         vehicleRepository.save(vehicle);

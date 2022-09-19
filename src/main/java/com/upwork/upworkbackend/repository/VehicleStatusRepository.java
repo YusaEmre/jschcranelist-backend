@@ -8,5 +8,4 @@ import java.util.List;
 @Repository
 public interface VehicleStatusRepository extends JpaRepository <VehicleWorkingStatus,Long>{
 
-    List<VehicleWorkingStatus> findAllByMonth(Month month);
 }

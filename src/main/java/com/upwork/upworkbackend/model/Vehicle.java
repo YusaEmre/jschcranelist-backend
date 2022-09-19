@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.Month;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +24,8 @@ public class Vehicle implements Serializable {
     private String vehicleModel;
     private String fleetNo;
     private String operator;
+    private Month month;
+    private Year year;
     private Double size;
     @OneToMany(cascade = CascadeType.ALL)
     private List<VehicleWorkingStatus> workingStatusList = new ArrayList<>();

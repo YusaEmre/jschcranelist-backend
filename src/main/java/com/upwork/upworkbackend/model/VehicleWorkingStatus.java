@@ -11,6 +11,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.Year;
+import java.time.YearMonth;
 
 @Entity
 @Data
@@ -21,10 +23,8 @@ public class VehicleWorkingStatus implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private LocalDate date;
     @ManyToOne
     private WorkingStatus workingStatus;
-    private Month month;
     private int day;
     @OneToOne(cascade = CascadeType.ALL)
     @JsonIgnore

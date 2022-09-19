@@ -19,8 +19,8 @@ public class VehicleController {
 
 
     @GetMapping
-    public List<Vehicle> getVehiclesByMonth(@RequestParam Month month){
-        return  vehicleService.getAllVehiclesByMonth(month);
+    public List<Vehicle> getVehiclesByMonth(@RequestParam("date") String date){
+        return  vehicleService.getAllVehiclesByMonth(date);
     }
 
     @PutMapping("/edit")
