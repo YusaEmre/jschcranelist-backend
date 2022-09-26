@@ -26,7 +26,7 @@ public class VehicleWorkingStatus implements Serializable {
     @ManyToOne
     private WorkingStatus workingStatus;
     private int day;
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne (cascade = CascadeType.ALL)
     @JsonIgnore
     private Vehicle vehicle;
 }
