@@ -8,11 +8,11 @@
 		<version>2.7.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.upwork</groupId>
-	<artifactId>upwork-backend</artifactId>
+	<groupId>com.jchcranelist</groupId>
+	<artifactId>jchcranelist</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>upwork-backend</name>
-	<description>upwork-backend</description>
+	<name>jch-crane-list</name>
+	<description>jch-crane-list</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
