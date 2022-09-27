@@ -31,4 +31,10 @@ public class VehicleController {
     public void saveVehicle(@RequestBody VehicleSaveRequest vehicleSaveRequest){
         vehicleService.saveVehicle(vehicleSaveRequest);
     }
+
+
+    @DeleteMapping("/delete/id/{vehicleId}")
+    public void deleteVehicle(@PathVariable Long vehicleId){
+        vehicleService.deleteVehicle(vehicleId);
+    }
 }

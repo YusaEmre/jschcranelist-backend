@@ -3,10 +3,7 @@ package com.jchcranelist.controller;
 import com.jchcranelist.model.WorkingStatus;
 import com.jchcranelist.service.WorkingStatusService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,7 +15,7 @@ public class WorkingStatusController {
 
 
 
-    @PostMapping("/api/workingstatus/save")
+    @PostMapping("/save")
     public void saveWorkingStatus(@RequestBody WorkingStatus workingStatus){
         workingStatusService.saveWorkingStatus(workingStatus);
     }
@@ -26,5 +23,11 @@ public class WorkingStatusController {
     public List<WorkingStatus> getWorkingStatus(){
         return workingStatusService.getWorkingStatus();
     }
+
+    @DeleteMapping("/delete/id/{statusId}")
+    public void deleteWorkingStatus(@PathVariable Long statusId){
+        workingStatusService.deleteWorkingStatus(statusId);
+    }
+
 }
 

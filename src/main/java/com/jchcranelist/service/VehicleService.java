@@ -90,4 +90,9 @@ public class VehicleService {
 
 
     }
+
+
+    public void deleteVehicle(Long vehicleId) {
+        vehicleRepository.deleteById(vehicleId);
+    }
 }

@@ -21,4 +21,8 @@ public class WorkingStatusService {
     public List<WorkingStatus> getWorkingStatus() {
        return workingStatusRepository.findAll();
     }
+
+    public void deleteWorkingStatus(Long statusId) {
+        workingStatusRepository.deleteById(statusId);
+    }
 }
