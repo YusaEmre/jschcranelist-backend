@@ -20,7 +20,9 @@ public class WorkingStatus implements Serializable {
     private Long id;
     private String statusName;
 
-    public WorkingStatus(String s) {
+    private String color;
+
+    public WorkingStatus(String s,String color) {
         this.statusName = s;
     }
 }

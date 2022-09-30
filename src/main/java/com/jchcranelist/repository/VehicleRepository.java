@@ -12,7 +12,6 @@ import java.util.List;
 public interface VehicleRepository  extends JpaRepository<Vehicle,Long>{
 
 
-
     List<Vehicle> findAllByMonthAndYear(Month month, Year year);
 
 }

@@ -1,5 +1,6 @@
 package com.jchcranelist.controller;
 
+import com.fasterxml.jackson.core.JsonToken;
 import com.jchcranelist.model.User;
 import com.jchcranelist.security.UserDetailServiceImpl;
 import com.jchcranelist.payload.request.UserRequest;
@@ -10,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -33,7 +35,7 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<?> userLogin(@RequestBody UserRequest userRequest) throws Exception {
-        System.out.println(userRequest);
+        logger.info(userRequest.toString());
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                     userRequest.getEmail(), userRequest.getPassword()
@@ -49,6 +51,7 @@ public class UserController {
         String token = tokenManager.generateJwtToken(userDetails);
         return ResponseEntity.ok(new JwtResponse(token));
     }
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/register")
     public void saveUser(@RequestBody User user) {
         userService.saveUser(user);
