@@ -23,6 +23,8 @@ public class WorkingStatus implements Serializable {
     private String color;
 
     public WorkingStatus(String s,String color) {
+
         this.statusName = s;
+        this.color = color;
     }
 }

@@ -13,6 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Month;
 import java.time.Year;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -68,16 +70,25 @@ public class VehicleService {
             vehicleSaveRequest.setVehicleStatus(workingStatus,vehicle);
 
         }else {
-            workingStatusRepository.save(new WorkingStatus("0","#FFFFFF"));
-            workingStatusRepository.save(new WorkingStatus("JO","#f3a30f"));
-            workingStatusRepository.save(new WorkingStatus("AV","#add8e6"));
-            workingStatusRepository.save(new WorkingStatus("P90","#4646d7"));
-            workingStatusRepository.save(new WorkingStatus("LT","#76d376"));
-            workingStatusRepository.save(new WorkingStatus("QT","#ffb6c1"));
-            workingStatusRepository.save(new WorkingStatus("P50","#add8e6"));
-            workingStatusRepository.save(new WorkingStatus("P75","#20b2aa"));
-            workingStatusRepository.save(new WorkingStatus("SE","#fdffa2"));
-            workingStatusRepository.save(new WorkingStatus("BD","#ed3333"));
+            WorkingStatus status0 = new WorkingStatus("0","#FFFFFF");
+            WorkingStatus statusJO = new WorkingStatus("JO","#f3a30f");
+            WorkingStatus statusAV = new WorkingStatus("AV","#add8e6");
+            WorkingStatus statusp9O = new WorkingStatus("P90","#4646d7");
+            WorkingStatus statusLT = new WorkingStatus("LT","#76d376");
+            WorkingStatus statusQT = new WorkingStatus("QT","#ffb6c1");
+            WorkingStatus statuspP50 = new WorkingStatus("P50","#add8e6");
+            WorkingStatus statusP75 = new WorkingStatus("P75","#20b2aa");
+            WorkingStatus statusSE = new WorkingStatus("SE","#fdffa2");
+            WorkingStatus statusBD =new WorkingStatus("BD","#ed3333");
+
+
+            System.out.println(statusBD.getColor());
+            System.out.println(statusJO.getColor());
+            System.out.println(status0.getColor());
+
+
+            List<WorkingStatus> workingStatusList = Arrays.asList(status0,statusBD,statusAV,statusJO,statusP75,statusp9O,statusLT,statusQT,statuspP50,statusSE);
+            workingStatusRepository.saveAll(workingStatusList);
             WorkingStatus workingStatus = workingStatusRepository.findById(1L).orElseThrow(()->new IllegalStateException("There is no status with id: " + 1L));
             vehicleSaveRequest.setVehicleStatus(workingStatus,vehicle);
         }
