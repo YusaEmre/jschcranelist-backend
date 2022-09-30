@@ -82,9 +82,6 @@ public class VehicleService {
             WorkingStatus statusBD =new WorkingStatus("BD","#ed3333");
 
 
-            System.out.println(statusBD.getColor());
-            System.out.println(statusJO.getColor());
-            System.out.println(status0.getColor());
 
 
             List<WorkingStatus> workingStatusList = Arrays.asList(status0,statusBD,statusAV,statusJO,statusP75,statusp9O,statusLT,statusQT,statuspP50,statusSE);
