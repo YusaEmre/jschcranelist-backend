@@ -48,7 +48,7 @@ public class WebSecurityConfig{
         http.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint);
 
         http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/user/login").permitAll()
-                .and().authorizeRequests().antMatchers(HttpMethod.GET, "/api/vehicle").permitAll().and().authorizeRequests().antMatchers("/api/**").authenticated();
+                .and().authorizeRequests().antMatchers(HttpMethod.GET, "/api/vehicle","/api/workingstatus").permitAll().and().authorizeRequests().antMatchers("/api/**").authenticated();
 
         http.authenticationManager(authenticationManager);
 

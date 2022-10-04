@@ -1,5 +1,6 @@
 package com.jchcranelist.security;
 
+import com.jchcranelist.model.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -23,8 +24,8 @@ public class TokenManager implements Serializable {
     @Value("${jwt.secret.name}")
     private String jwtSecret;
 
-    public String generateJwtToken(UserDetails userDetails){
-        return Jwts.builder().setSubject(userDetails.getUsername())
+    public String generateJwtToken(User user){
+        return Jwts.builder().setSubject(user.getEmail())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + expirationDate))
                 .signWith(SignatureAlgorithm.HS512, jwtSecret).compact();
@@ -40,5 +41,13 @@ public class TokenManager implements Serializable {
         Claims claims = Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody();
         logger.debug(claims.getSubject(),claims.getIssuer());
         return claims.getSubject();
+    }
+
+
+    public String generateJwtTokenByUserName(String userName) {
+        return Jwts.builder().setSubject(userName)
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis()+expirationDate))
+                .signWith(SignatureAlgorithm.HS512,jwtSecret).compact();
     }
 }

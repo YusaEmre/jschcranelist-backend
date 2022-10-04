@@ -20,6 +20,11 @@ public class UserDetailImpl implements UserDetails {
         return Arrays.asList(new SimpleGrantedAuthority(user.getRole().name()));
     }
 
+
+    public User getUser(){
+        return user;
+    }
+
     @Override
     public String getPassword() {
         return user.getPassword();

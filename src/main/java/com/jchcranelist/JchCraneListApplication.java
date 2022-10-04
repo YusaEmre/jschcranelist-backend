@@ -1,13 +1,11 @@
 package com.jchcranelist;
 
-import com.jchcranelist.config.AdminProperities;
+import com.jchcranelist.utils.AdminProperities;
 import com.jchcranelist.model.User;
-import com.jchcranelist.repository.UserRepository;
 import com.jchcranelist.service.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
 public class JchCraneListApplication implements CommandLineRunner {

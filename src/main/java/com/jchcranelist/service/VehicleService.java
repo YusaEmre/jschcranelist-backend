@@ -8,6 +8,7 @@ import com.jchcranelist.payload.request.VehicleSaveRequest;
 import com.jchcranelist.repository.VehicleStatusRepository;
 import com.jchcranelist.repository.WorkingStatusRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,10 +21,10 @@ import java.util.List;
 @Service
 @Transactional
 @RequiredArgsConstructor
+@Slf4j
 public class VehicleService {
     private final VehicleRepository vehicleRepository;
 
-    private final VehicleStatusRepository vehicleStatusRepository;
 
     private final WorkingStatusRepository workingStatusRepository;
 
@@ -45,9 +46,12 @@ public class VehicleService {
     }
 
     public void editVehicleStatus(Vehicle requestVehicle) {
+
         for (VehicleWorkingStatus vehicleWorkingStatus:requestVehicle.getWorkingStatusList()) {
             vehicleWorkingStatus.setVehicle(requestVehicle);
         }
+
+
         vehicleRepository.saveAndFlush(requestVehicle);
 
     }

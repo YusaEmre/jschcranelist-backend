@@ -1,4 +1,4 @@
-package com.jchcranelist.config;
+package com.jchcranelist.utils;
 
 import com.jchcranelist.model.Role;
 import lombok.RequiredArgsConstructor;
