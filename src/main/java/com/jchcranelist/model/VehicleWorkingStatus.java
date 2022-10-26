@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Builder(toBuilder = true)
 public class VehicleWorkingStatus implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,6 +21,7 @@ public class VehicleWorkingStatus implements Serializable {
     @ManyToOne
     private WorkingStatus workingStatus;
     private int day;
+    private String comment = "";
     @ManyToOne (cascade = CascadeType.ALL)
     @JsonIgnore
     private Vehicle vehicle;

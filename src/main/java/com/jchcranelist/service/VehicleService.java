@@ -74,16 +74,16 @@ public class VehicleService {
             vehicleSaveRequest.setVehicleStatus(workingStatus,vehicle);
 
         }else {
-            WorkingStatus status0 = new WorkingStatus("0","#FFFFFF");
-            WorkingStatus statusJO = new WorkingStatus("JO","#f3a30f");
-            WorkingStatus statusAV = new WorkingStatus("AV","#add8e6");
-            WorkingStatus statusp9O = new WorkingStatus("P90","#4646d7");
-            WorkingStatus statusLT = new WorkingStatus("LT","#76d376");
-            WorkingStatus statusQT = new WorkingStatus("QT","#ffb6c1");
-            WorkingStatus statuspP50 = new WorkingStatus("P50","#add8e6");
-            WorkingStatus statusP75 = new WorkingStatus("P75","#20b2aa");
-            WorkingStatus statusSE = new WorkingStatus("SE","#fdffa2");
-            WorkingStatus statusBD =new WorkingStatus("BD","#ed3333");
+            WorkingStatus status0 = new WorkingStatus("0","#FFFFFF",false);
+            WorkingStatus statusJO = new WorkingStatus("JO","#f3a30f",true);
+            WorkingStatus statusAV = new WorkingStatus("AV","#add8e6",false);
+            WorkingStatus statusp9O = new WorkingStatus("P90","#4646d7",true);
+            WorkingStatus statusLT = new WorkingStatus("LT","#76d376",true);
+            WorkingStatus statusQT = new WorkingStatus("QT","#ffb6c1",true);
+            WorkingStatus statuspP50 = new WorkingStatus("P50","#add8e6",true);
+            WorkingStatus statusP75 = new WorkingStatus("P75","#20b2aa",true);
+            WorkingStatus statusSE = new WorkingStatus("SE","#fdffa2",true);
+            WorkingStatus statusBD =new WorkingStatus("BD","#ed3333",false);
 
 
 

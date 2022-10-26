@@ -30,7 +30,7 @@ public class VehicleSaveRequest {
         int days = yearMonth.lengthOfMonth();
 
         for (int i = 0; i < days; i++){
-            VehicleWorkingStatus vehicleWorkingStatus = VehicleWorkingStatus.builder()
+            VehicleWorkingStatus vehicleWorkingStatus = new  VehicleWorkingStatus().toBuilder()
                     .vehicle(vehicle)
                     .day(i)
                     .workingStatus(workingStatus)
